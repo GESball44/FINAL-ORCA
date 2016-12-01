@@ -1,0 +1,8 @@
+*.suo
+ORCA/bin/ORCA.dll
+*.pdb
+ORCA/App_Data/aspnet-ORCA-20161027030650.mdf
+*.ldf
+*.dll
+ORCA/obj/Debug/ORCA.csprojResolveAssemblyReference.cache
+*.pdb

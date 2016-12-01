@@ -15,6 +15,7 @@ namespace ORCA.Models
         public string Category { get; set; }
         public string Description { get; set; }
         public bool Requested { get; set; }
-        
+        public bool Activated { get; set; }
+
     }
 }

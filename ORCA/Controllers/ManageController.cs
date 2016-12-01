@@ -444,7 +444,7 @@ namespace ORCA.Controllers
             var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             using (SqlConnection myConnection = new SqlConnection(con))
             {
-                string oString = "Select * from Users where Email=@Requested";
+                string oString = "Select * from Experts where Email=@Requested";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
                 oCmd.Parameters.AddWithValue("@requested", email);
                 myConnection.Open();
@@ -467,7 +467,37 @@ namespace ORCA.Controllers
             }
             return hasRequested;
         }
-        //for expert table ^^^^
+
+        public bool getIsActivated(string email)
+        {
+            bool isActivated = false;
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from Experts where Email=@Activated";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@activated", email);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        string a = oReader["Activated"].ToString();
+                        if (a.Equals("True"))
+                        {
+                            isActivated = true;
+                        }
+                        else
+                        {
+                            isActivated = false;
+                        }
+                    }
+                    myConnection.Close();
+                }
+            }
+            return isActivated;
+        }
+//for expert table ^^^^
 
 
         //GET: /Manage/AdminPromote
@@ -553,7 +583,8 @@ namespace ORCA.Controllers
                 Email = email,
                 Title = getExpertTitle(email),
                 Category = getExpertCategory(email),
-                Description = getExpertDesc(email)
+                Description = getExpertDesc(email),
+                Activated = getIsActivated(email)
             };
 
             if (ModelState.IsValid)
@@ -590,7 +621,7 @@ namespace ORCA.Controllers
                 ID = getID(model.Email),
 
                 //edited by user
-                Email = model.Email,
+                Email = User.Identity.GetUserName(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
@@ -608,7 +639,8 @@ namespace ORCA.Controllers
                 Email = model.Email,
                 Title = getExpertTitle(User.Identity.GetUserName()),
                 Category = getExpertCategory(User.Identity.GetUserName()),
-                Description = getExpertDesc(User.Identity.GetUserName())
+                Description = getExpertDesc(User.Identity.GetUserName()),
+                Activated = getIsActivated(User.Identity.GetUserName())
             };
 
 
@@ -635,40 +667,88 @@ namespace ORCA.Controllers
             return View(temp);
         }
 
-        //GET: /Manage/CreateTicket
-        public ActionResult CreateTicket()
-        {
-
-            return View();
-        }
-        //POST: /Manage/CreateTicket
+        //this method is strictly for when someone activates or deactivates their account
+        //POST: /Manage/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTicket(Ticket model)
+        public ActionResult Index(string email)
         {
-            //// expertID = ;
-            //var ticket = new Ticket
-            //{
-            //    ID = model.ID,
-            //    UserEmail = User.Identity.GetUserName(),
-            //    ExpertID = ,
-            //    Subject = model.Subject,
-            //    Text = model.Text,
-            //    CreateDate = DateTime.Today.ToString()
+            bool x = false;
+            if (getIsActivated(email) == true)
+            {
+                x = false;
+            }
+            else
+            {
+                x = true;
+            }
+            var expert = new Expert
+            {
+                //only one to be changed
+                Activated = x,
+                //these need to just be taken from db
+                ID = getExpertID(email),
+                Email = email,
+                Title = getExpertTitle(email),
+                Category = getExpertCategory(email),
+                Description = getExpertDesc(email),
+                Requested = getHasRequested(email)
+            };
+            
 
-            //};
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(ticket).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            return View();
+            if (ModelState.IsValid)
+            {
+                //save new expert info
+                db.Entry(expert).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(expert);
         }
 
+        //GET: /Manage/ActivateDeactivate
+        public ActionResult ActivateDeactivate()
+        {
+            var temp = db.Experts.ToList();
+            return View(temp);
+        }
 
+        //POST: /Manage/ActivateDeactivate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ActivateDeactivate(string email)
+        {
+            bool x = false;
+            if (getIsActivated(email) == true)
+            {
+                x = false;
+            }
+            else
+            {
+                x = true;
+            }
+            var expert = new Expert
+            {
+                //only one to be changed
+                Activated = x,
+                //these need to just be taken from db
+                ID = getExpertID(email),
+                Email = email,
+                Title = getExpertTitle(email),
+                Category = getExpertCategory(email),
+                Description = getExpertDesc(email),
+                Requested = getHasRequested(email)
+            };
 
+            if (ModelState.IsValid)
+            {
+                db.Entry(expert).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(expert);
+
+        }
 
 
 

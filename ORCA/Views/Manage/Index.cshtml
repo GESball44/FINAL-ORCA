@@ -46,6 +46,11 @@
         <dd>
             @Html.ActionLink("Here", "AdminPromote")
         </dd>
+
+        <dt>Activate/Deactivate Expert:</dt>
+        <dd>
+            @Html.ActionLink("Here", "ActivateDeactivate")
+        </dd>
         }
 
         
@@ -63,7 +68,19 @@
             }
             ]
         </dd>
-        
-        
+        @if (type.Equals("expert"))
+        {
+            <dt>Deactivate/Activate your account here:</dt>
+            <dd>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@email" name="Email" />
+                    <input type="submit" name="Change"/>
+                }
+            </dd>
+        }
+
     </dl>
+
 </div>
