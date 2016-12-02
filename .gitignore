@@ -1,0 +1,5 @@
+*.suo
+ORCA/bin/ORCA.dll
+*.pdb
+*.dll
+ORCA/obj/Debug/ORCA.pdb

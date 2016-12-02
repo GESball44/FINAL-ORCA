@@ -113,13 +113,23 @@
     <div class="list-Of-ORCA">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-           @* <li>@Html.ActionLink("MU Experts", "About", "Home")</li>*@
+            <li>@Html.ActionLink("MU Experts", "ExpertList", "Manage")</li>
              <li>@Html.ActionLink("About", "About", "Home")</li>
             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Message", "SendMessage", "Manage")</li>
+
         </ul>
     </div>
     <br />
     <br />
+    @* this is the search will do in the home page *@
+    <div class="right">
+        @using (Html.BeginForm("ExpertList", "Manage", FormMethod.Get))
+        {
+            <b>Search By: Catagory </b>  <br />
+            @Html.TextBox("search")<input type="submit" value="Search" />
+        }
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />

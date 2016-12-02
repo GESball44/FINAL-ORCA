@@ -627,20 +627,45 @@ namespace ORCA.Controllers
             }
             return View(user);
         }
-
+        // i will add Search 
         //GET: /Manage/ExpertList
-        public ActionResult ExpertList()
+        public ActionResult ExpertList(string searchBy, string search)
         {
-            var temp = db.Experts.ToList();
-            return View(temp);
-        }
+            if (searchBy == "Catagory")
+            {
+                return View(db.Experts.Where(x => x.Email == search || search == null).ToList());
+            }
+            else
+            {
+                return View(db.Experts.Where(x => x.Category.StartsWith(search) || search == null).ToList());
+            }
 
+        }
+        // var temp = db.Experts.ToList();
+        //return View(temp);
+
+    
+         
         //GET: /Manage/CreateTicket
         public ActionResult CreateTicket()
         {
+              return View();
+         }
 
-            return View();
-        }
+        // Ticket 
+        
+        //public ActionResult SendMessage(string subject, string text)
+        //{
+          //  var subject = this.db.Tickets;
+
+            //{
+              //  subject = subject;
+                //text = this.db.Tickets.ToList();
+            //};
+            //return View();
+            //var eback = db.Tickets.ToList();
+           // return View(eback);
+        //}
         //POST: /Manage/CreateTicket
         [HttpPost]
         [ValidateAntiForgeryToken]

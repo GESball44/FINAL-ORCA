@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Send Message", "CreateTicket", new { id=item.ID })
+            @Html.ActionLink("Send Message", "Create", "Tickets", routeValues: null, htmlAttributes: new { id = "CreateLink" })
         </td>
     </tr>
 }
