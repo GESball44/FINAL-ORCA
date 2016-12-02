@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ORCA.Models.Expert>
 
 @{
+    ORCA.Controllers.ManageController thing = new ORCA.Controllers.ManageController();
     ViewBag.Title = "ExpertList";
 }
 
@@ -24,23 +25,26 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Send Message", "CreateTicket", new { id=item.ID })
-        </td>
-    </tr>
+    if (thing.getIsActivated(item.Email) == true)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Send Message", "CreateTicket", new { id = item.ID })
+            </td>
+        </tr>
+    }
 }
 
 </table>

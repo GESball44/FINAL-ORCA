@@ -19,6 +19,7 @@ namespace ORCA.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private DefaultConnection db = new DefaultConnection();
+        private string EXPERT_ID;
 
         public ManageController()
         {
@@ -661,6 +662,7 @@ namespace ORCA.Controllers
         }
 
         //GET: /Manage/ExpertList
+        [AllowAnonymous]
         public ActionResult ExpertList()
         {
             var temp = db.Experts.ToList();
@@ -750,7 +752,38 @@ namespace ORCA.Controllers
 
         }
 
+        //GET: /Manage/CreateTicket
+        public ActionResult CreateTicket(string id)
+        {
+            //EXPERT_ID = id;
+            ViewBag.ExpertID = id;
+            return View();
+        }
 
+        //POST: /Manage/CreateTicket
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTicket(Ticket model)
+        {
+            // short term solution to this problem
+            //string temp = EXPERT_ID;
+            var ticket = new Ticket
+            {
+                Text = model.Text,
+                Subject = model.Subject,
+                CreateDate = DateTime.Today.ToString(),
+                UserEmail = User.Identity.GetUserName(),
+                ExpertID = model.ExpertID
+            };
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(ticket).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(ticket);
+        }
 
 
 
