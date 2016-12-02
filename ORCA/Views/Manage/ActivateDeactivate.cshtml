@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ORCA.Models.Expert>
+    @using Microsoft.AspNet.Identity
+
+@{
+    ORCA.Controllers.ManageController thing = new ORCA.Controllers.ManageController();
+    String email = User.Identity.GetUserName();
+    String type = thing.getUserType(email);
+    Boolean isAdmin = thing.getIsAdmin(email);
+
+    ViewBag.Title = "ActivateDeactivate";
+}
+
+<h2>ActivateDeactivate</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activated)
+        </th>
+        <th></th>
+    </tr>
+@if (isAdmin == true)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activated)
+            </td>
+            <td>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@item.Email" name="Email" />
+                    <input type="submit" name="Change"/>
+                }
+            </td>
+        </tr>
+    }
+}
+
+</table>

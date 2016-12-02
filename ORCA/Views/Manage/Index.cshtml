@@ -24,28 +24,33 @@
 
         @if(type.Equals("user"))
         {
-        <dt>Request to become Expert:</dt>
-        <dd>
-            @Html.ActionLink("Here", "ExpertRequest")
-        </dd>
+            <dt>Request to become Expert:</dt>
+            <dd>
+                @Html.ActionLink("Here", "ExpertRequest")
+            </dd>
 
-        <dt>Select an Expert to send a Message to:</dt>
-        <dd>
-            @Html.ActionLink("Here", "ExpertList")
-        </dd>
+            <dt>Select an Expert to send a Message to:</dt>
+            <dd>
+                @Html.ActionLink("Here", "ExpertList")
+            </dd>
         }
 
         @if (isAdmin == true)
         {
-        <dt>View List of Expert Requests:</dt>
-        <dd>
-            @Html.ActionLink("Here", "VerifyExpert")
-        </dd>
+            <dt>View List of Expert Requests:</dt>
+            <dd>
+                @Html.ActionLink("Here", "VerifyExpert")
+            </dd>
 
-        <dt>Promote Account to Admin:</dt>
-        <dd>
-            @Html.ActionLink("Here", "AdminPromote")
-        </dd>
+            <dt>Promote Account to Admin:</dt>
+            <dd>
+                @Html.ActionLink("Here", "AdminPromote")
+            </dd>
+
+            <dt>Activate/Deactivate Expert:</dt>
+            <dd>
+                @Html.ActionLink("Here", "ActivateDeactivate")
+            </dd>
         }
 
         
@@ -63,7 +68,21 @@
             }
             ]
         </dd>
-        
-        
+        @if (type.Equals("expert"))
+        {
+            <dt>Deactivate/Activate your account here:</dt>
+            <dd>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@email" name="Email" />
+                    <input type="submit" name="Change"/>
+                }
+            </dd>
+
+
+        }
+
     </dl>
+
 </div>
