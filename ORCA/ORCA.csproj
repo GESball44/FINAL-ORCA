@@ -249,11 +249,20 @@
     <Compile Include="Migrations\201611302320212_activation.Designer.cs">
       <DependentUpon>201611302320212_activation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612032148338_parent.cs" />
+    <Compile Include="Migrations\201612032148338_parent.Designer.cs">
+      <DependentUpon>201612032148338_parent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612032213104_tickid to int.cs" />
+    <Compile Include="Migrations\201612032213104_tickid to int.Designer.cs">
+      <DependentUpon>201612032213104_tickid to int.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Expert.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Parent.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
@@ -328,6 +337,10 @@
     <Content Include="Views\Manage\ExpertList.cshtml" />
     <Content Include="Views\Manage\CreateTicket.cshtml" />
     <Content Include="Views\Manage\ActivateDeactivate.cshtml" />
+    <Content Include="Views\Manage\Inbox.cshtml" />
+    <Content Include="Views\Manage\ExpertRequest.cshtml" />
+    <Content Include="Views\Manage\TicketThread.cshtml" />
+    <Content Include="Views\Manage\NewResponse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -376,6 +389,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611302320212_activation.resx">
       <DependentUpon>201611302320212_activation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612032148338_parent.resx">
+      <DependentUpon>201612032148338_parent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612032213104_tickid to int.resx">
+      <DependentUpon>201612032213104_tickid to int.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,7 +7,7 @@ namespace ORCA.Models
 {
     public class Response
     {
-        public string TickId { get; set; }
+        public int TickId { get; set; }
         public int ID { get; set; }
         public string ResponseText { get; set; }
     }
