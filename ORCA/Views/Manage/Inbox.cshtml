@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ORCA.Models.Ticket>
+    @using Microsoft.AspNet.Identity
+
+
+@{
+    ORCA.Controllers.ManageController thing = new ORCA.Controllers.ManageController();
+    ViewBag.Title = "Inbox";
+}
+
+<h2>Inbox</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    string experId = thing.getExpertID(User.Identity.GetUserName()).ToString();
+    if (experId.Equals(item.ExpertID)||User.Identity.GetUserName().Equals(item.UserEmail))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.ActionLink("View", "TicketThread", new { id = item.ID })
+            </td>
+        </tr>
+    }
+}
+
+</table>

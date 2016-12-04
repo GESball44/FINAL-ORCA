@@ -19,7 +19,6 @@ namespace ORCA.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private DefaultConnection db = new DefaultConnection();
-        private string EXPERT_ID;
 
         public ManageController()
         {
@@ -502,6 +501,31 @@ namespace ORCA.Controllers
 
 
         //GET: /Manage/AdminPromote
+
+        public int getTickID(int exID)
+        {
+            int tickID = 0;
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from Tickets Where ExpertID=@theID";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Theid", exID);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        tickID = Convert.ToInt32(oReader["ID"].ToString());
+                    }
+                    myConnection.Close();
+                }
+            }
+            return tickID;
+        }
+
+
+
         public ActionResult AdminPromote()
         {
             var temp = db.Users.ToList();
@@ -661,13 +685,71 @@ namespace ORCA.Controllers
             return View(user);
         }
 
-        //GET: /Manage/ExpertList
-        [AllowAnonymous]
-        public ActionResult ExpertList()
+        //GET: /Manage/ExpertRequest
+        public ActionResult ExpertRequest()
         {
-            var temp = db.Experts.ToList();
+            return View();
+        }
+
+        //POST: /Manage/ExpertRequest
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExpertRequest(Expert model)
+        {
+            var expert = new Expert
+            {
+                ID = model.ID,
+                Title = model.Title,
+                Category = model.Category,
+                Description = model.Description,
+                Email = User.Identity.GetUserName(),
+                Requested = true,
+                Activated = true
+            };
+
+            if (ModelState.IsValid)
+            {
+                db.Experts.Add(expert);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(expert);
+        }
+
+        //GET: /Manage/Inbox
+        public ActionResult Inbox()
+        {
+            var temp = db.Tickets.ToList();
             return View(temp);
         }
+
+        //GET: /Manage/TicketThread
+        public ActionResult TicketThread(int id)
+        {
+            ViewBag.TicketID = id;
+            var temp = db.Responses.ToList();
+            return View(temp);
+        }
+
+        //GET: /Manage/ExpertList
+        [AllowAnonymous]
+        public ActionResult ExpertList(string searchBy, string search)
+        {
+            if (searchBy == "Catagory")
+            {
+                return View(db.Experts.Where(x => x.Email == search || search == null).ToList());
+            }
+            else
+            {
+                return View(db.Experts.Where(x => x.Category.StartsWith(search) || search == null).ToList());
+            }
+        }
+       // public ActionResult ExpertList()
+        //{
+          //  var temp = db.Experts.ToList();
+            //return View(temp);
+        //}
 
         //this method is strictly for when someone activates or deactivates their account
         //POST: /Manage/Index
@@ -760,13 +842,21 @@ namespace ORCA.Controllers
             return View();
         }
 
+        //generate ticket id
+        public int GenTickID()
+        {
+            Random rnd = new Random();
+            int id = rnd.Next(9999999);
+
+            return id;
+        }
+
         //POST: /Manage/CreateTicket
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateTicket(Ticket model)
         {
-            // short term solution to this problem
-            //string temp = EXPERT_ID;
+            int i = GenTickID();
             var ticket = new Ticket
             {
                 Text = model.Text,
@@ -778,14 +868,58 @@ namespace ORCA.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Entry(ticket).State = EntityState.Modified;
+                db.Tickets.Add(ticket);
+                db.SaveChanges();
+            }
+
+            var response = new Response
+            {
+                TickId = getTickID(Convert.ToInt32(model.ExpertID)),
+                ResponseText = model.Text,
+            };
+
+            //var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+
+            if (ModelState.IsValid)
+            {
+                db.Responses.Add(response);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(ticket);
         }
 
+        //GET: /Manage/NewResponse
+        public ActionResult NewResponse(int id)
+        {
+            ViewBag.TickID = id;
+            return View();
+        }
 
+        //POST: /Manage/NewResponse
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewResponse(Response model)
+        {
+            var response = new Response
+            {
+                ResponseText = model.ResponseText,
+                TickId = model.TickId
+            };
+            if (ModelState.IsValid)
+            {
+                db.Responses.Add(response);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(response);
+        }
+
+        public ActionResult Chat()
+        {
+            return View();
+        }
 
 
 

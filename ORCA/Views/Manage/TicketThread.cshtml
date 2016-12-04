@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ORCA.Models.Response>
+    @using Microsoft.AspNet.Identity
+
+
+@{
+    ORCA.Controllers.ManageController thing = new ORCA.Controllers.ManageController();
+
+
+    ViewBag.Title = "TicketThread";
+}
+
+<h2>TicketThread</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TickId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponseText)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (ViewBag.TicketID == item.TickId)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TickId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResponseText)
+            </td>
+            <td>
+                @Html.ActionLink("Reply", "NewResponse", new { id = item.TickId })
+            </td>
+        </tr>
+    }
+}
+
+</table>

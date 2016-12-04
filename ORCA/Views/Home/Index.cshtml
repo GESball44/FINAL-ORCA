@@ -1,72 +1,89 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@*
-<style>
-    .pagraph1 {
-        font-family: Arial;
-        font-size: 16px;
-        color: green;
-        text-align: justify;
-    }
 
-    .img-thumbnail {
-        position:fixed;
-        top: 300px;
-        width: 800px;
-        height: 250px;
-        margin-left: 25px;
-        align-items:center;
-    }
+       <style>
+            .pagraph1 {
+                font-family: Arial;
+                font-size: 16px;
+                color: black;
+                text-align: justify;
+            }
 
- 
-</style>
+            .img-thumbnail {
+                right:180px;
+                top: 300px;
+                width: 800px;
+                height: 250px;
+                margin-left: 25px;
+                align-items:center;
+            }
 
 
-
-<div>
-
-    <img class="img-thumbnail" src="http://www.marshall.edu/leedgreen/files/WAEC-1.jpg" />
+        </style>
 
 
-</div>
-<br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+        <div>
+
+            <img class="img-thumbnail" src="https://lh5.googleusercontent.com/-4BYvLvBuPEw/AAAAAAAAAAI/AAAAAAAAAMs/J1Z-QL6q2tw/s0-c-k-no-ns/photo.jpg", width="200" height="500" />
 
 
-<div>
-    <p class="pagraph1">
-        When news breaks, Marshall University experts can help representatives of print and broadcast media explain the story to the public.
+        </div>
+        <br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
-        University Communications only refers experts who have expressed a willingness to respond promptly to questions about specific subjects and issues.
+        <div>
+            <p class="pagraph1">
+                When news breaks, Marshall University experts can help representatives of print and broadcast media explain the story to the public.
 
-        Interviews or consultations with these individuals may be arranged by calling Dave Wellman at 304-696-7153 for our Huntington campus or Lalena Price 304-746-1989 for our South Charleston campus.
+                University Communications only refers experts who have expressed a willingness to respond promptly to questions about specific subjects and issues.
 
-        Please contact Leah Payne at 304-691-1713 to arrange interviews for our medicine experts.
+                Interviews or consultations with these individuals may be arranged by calling Dave Wellman at 304-696-7153 for our Huntington campus or Lalena Price 304-746-1989 for our South Charleston campus.
 
-        Please refer to the categories on the right of this page for a listing of experts. We appreciate your interest in Marshall University!
-    </p>
-</div>
+                Please contact Leah Payne at 304-691-1713 to arrange interviews for our medicine experts.
+
+                Please refer to the categories on the right of this page for a listing of experts. We appreciate your interest in Marshall University!
+            </p>
+        </div>
 
 
+    @*
+
+    <div class="list-Of-ORCA">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("Expertlist", "Manage")</li>
+            @* <li>@Html.ActionLink("MU Experts", "About", "Home")</li>
+
+            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Ticket", "CreateTicket", "Manage")</li>
+            <li>@Html.ActionLink("LiveChat", "Chat", "Manage")</li>
+
+
+
+
+
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Getting started</h2>
+                    <p>
+                        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                        enables a clean separation of concerns and gives you full control over markup
+                        for enjoyable, agile development.
+                    </p>
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Get more libraries</h2>
+                    <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Web Hosting</h2>
+                    <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+                </div>
+            </div>
 *@
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

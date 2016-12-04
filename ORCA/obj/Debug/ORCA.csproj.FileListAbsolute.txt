@@ -187,3 +187,9 @@ C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\obj\Debug\ORCA.csproj.GenerateR
 C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\obj\Debug\ORCA.dll
 C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\obj\Debug\ORCA.pdb
 C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\obj\Debug\ORCA.Migrations.activation.resources
+C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\obj\Debug\ORCA.Migrations.parent.resources
+C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\obj\Debug\ORCA.Migrations.tickidtoint.resources
+C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\GeoffS\Documents\GitHub\FINAL-ORCA\ORCA\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

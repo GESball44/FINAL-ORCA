@@ -72,6 +72,14 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -201,6 +209,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LiveHelpHub.cs" />
     <Compile Include="Migrations\201610271920522_user.cs" />
     <Compile Include="Migrations\201610271920522_user.Designer.cs">
       <DependentUpon>201610271920522_user.cs</DependentUpon>
@@ -249,11 +258,20 @@
     <Compile Include="Migrations\201611302320212_activation.Designer.cs">
       <DependentUpon>201611302320212_activation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612032148338_parent.cs" />
+    <Compile Include="Migrations\201612032148338_parent.Designer.cs">
+      <DependentUpon>201612032148338_parent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612032213104_tickid to int.cs" />
+    <Compile Include="Migrations\201612032213104_tickid to int.Designer.cs">
+      <DependentUpon>201612032213104_tickid to int.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Expert.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Parent.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
@@ -278,6 +296,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -328,6 +348,11 @@
     <Content Include="Views\Manage\ExpertList.cshtml" />
     <Content Include="Views\Manage\CreateTicket.cshtml" />
     <Content Include="Views\Manage\ActivateDeactivate.cshtml" />
+    <Content Include="Views\Manage\Inbox.cshtml" />
+    <Content Include="Views\Manage\ExpertRequest.cshtml" />
+    <Content Include="Views\Manage\TicketThread.cshtml" />
+    <Content Include="Views\Manage\NewResponse.cshtml" />
+    <Content Include="Views\Manage\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -376,6 +401,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611302320212_activation.resx">
       <DependentUpon>201611302320212_activation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612032148338_parent.resx">
+      <DependentUpon>201612032148338_parent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612032213104_tickid to int.resx">
+      <DependentUpon>201612032213104_tickid to int.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
