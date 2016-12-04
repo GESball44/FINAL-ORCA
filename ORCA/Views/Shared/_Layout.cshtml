@@ -42,11 +42,11 @@
         }
 
         ol {
-            position: absolute;
+            position: fixed;
             right: 100px;
             color: green;
             font-size: 16px;
-            bottom: 540px;
+            bottom: 650px;
         }
 
         body {
@@ -113,9 +113,12 @@
     <div class="list-Of-ORCA">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-           @* <li>@Html.ActionLink("MU Experts", "About", "Home")</li>*@
-             <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li>@Html.ActionLink("MU Experts", "ExpertList", "Manage")</li>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            @*<li>@Html.ActionLink("Ticket", "CreateTicket", "Manage")</li>*@
+            <li>@Html.ActionLink("LiveChat", "Chat", "Manage")</li>
+
         </ul>
     </div>
     <br />

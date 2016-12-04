@@ -734,11 +734,22 @@ namespace ORCA.Controllers
 
         //GET: /Manage/ExpertList
         [AllowAnonymous]
-        public ActionResult ExpertList()
+        public ActionResult ExpertList(string searchBy, string search)
         {
-            var temp = db.Experts.ToList();
-            return View(temp);
+            if (searchBy == "Catagory")
+            {
+                return View(db.Experts.Where(x => x.Email == search || search == null).ToList());
+            }
+            else
+            {
+                return View(db.Experts.Where(x => x.Category.StartsWith(search) || search == null).ToList());
+            }
         }
+       // public ActionResult ExpertList()
+        //{
+          //  var temp = db.Experts.ToList();
+            //return View(temp);
+        //}
 
         //this method is strictly for when someone activates or deactivates their account
         //POST: /Manage/Index
@@ -905,7 +916,10 @@ namespace ORCA.Controllers
             return View(response);
         }
 
-
+        public ActionResult Chat()
+        {
+            return View();
+        }
 
 
 

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+
+
+<h3>Live Chat</h3>
+
+
+
+Yourname: <input type="text" id="username" />
+message: <input type="text" id="message" />
+<input type="button" id="send" value="Send" />
+<ul id="liveHelp"></ul>
+
+
+
+@section scripts {
+
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        var liveHelp = $.connection.liveHelpHub;
+        liveHelp.client.showMessage = function (username, message) {
+            $('#liveHelp').append('<li>' + username + ':' + message + '</li>');
+        };
+        $.connection.hub.start().done(function(){
+            $('#send').click(function(){
+                liveHelp.server.sendMessage($('#username').val(), $('#message').val());
+                $('#message').val('');
+            });
+        });
+    </script>
+
+
+}
