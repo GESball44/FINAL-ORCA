@@ -40,8 +40,8 @@
     </tr>
 
 @foreach (var item in Model) {
-    if (thing.getIsActivated(item.Email) == true && thing.getHasRequested(item.Email) == false)
-    {
+    //if (thing.getIsActivated(item.Email) == true && thing.getHasRequested(item.Email) == false)
+    //{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -59,7 +59,7 @@
                 @Html.ActionLink("Send Message", "CreateTicket", new { id = item.ID })
             </td>
         </tr>
-    }
+    //}
 }
 
 </table>
