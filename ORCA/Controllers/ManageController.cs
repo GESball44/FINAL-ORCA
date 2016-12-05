@@ -250,9 +250,9 @@ namespace ORCA.Controllers
             var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             using (SqlConnection myConnection = new SqlConnection(con))
             {
-                string oString = "Select * from Users where email=@Usertype";
+                string oString = "Select * from Users where email=@UserType";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
-                oCmd.Parameters.AddWithValue("@usertype", email);
+                oCmd.Parameters.AddWithValue("@UserType", email);
                 myConnection.Open();
                 using (SqlDataReader oReader = oCmd.ExecuteReader())
                 {
@@ -640,10 +640,10 @@ namespace ORCA.Controllers
                 //not edited by user
                 //all of these need to be taken from database otherwise they will all try to fill with null because the view isnt returning anytihng
                 //taken using email. should be safe??
-                UserType = getUserType(model.Email),
-                IsAdmin = getIsAdmin(model.Email),
-                CreateDate = getCreateDate(model.Email),
-                ID = getID(model.Email),
+               // UserType = getUserType(model.Email),
+                IsAdmin = getIsAdmin(User.Identity.GetUserName()),
+                CreateDate = getCreateDate(User.Identity.GetUserName()),
+                ID = getID(User.Identity.GetUserName()),
 
                 //edited by user
                 Email = User.Identity.GetUserName(),
