@@ -8,3 +8,4 @@ ORCA/obj/Debug/ORCA.csprojResolveAssemblyReference.cache
 *.pdb
 *.dll
 ORCA/obj/Debug/ORCA.pdb
+*.suo
