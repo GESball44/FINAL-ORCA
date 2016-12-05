@@ -640,7 +640,7 @@ namespace ORCA.Controllers
                 //not edited by user
                 //all of these need to be taken from database otherwise they will all try to fill with null because the view isnt returning anytihng
                 //taken using email. should be safe??
-               // UserType = getUserType(model.Email),
+                UserType = getUserType(User.Identity.GetUserName()),
                 IsAdmin = getIsAdmin(User.Identity.GetUserName()),
                 CreateDate = getCreateDate(User.Identity.GetUserName()),
                 ID = getID(User.Identity.GetUserName()),
